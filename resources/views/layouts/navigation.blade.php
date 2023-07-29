@@ -16,11 +16,13 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('employees.index')" :active="request()->routeIs('employees.index')">
-                        {{ __('Employee') }}
-                    </x-nav-link>
-                </div>
+                @if (Auth::user()->roles === 'admin')
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-nav-link :href="route('employees.index')" :active="request()->routeIs('employees.index')">
+                            {{ __('Employee') }}
+                        </x-nav-link>
+                    </div>
+                @endif
             </div>
 
             <!-- Settings Dropdown -->
@@ -75,9 +77,12 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('employees.index')" :active="request()->routeIs('employees.index')">
-                {{ __('Employee') }}
-            </x-responsive-nav-link>
+
+            @if (Auth::user()->roles === 'admin')
+                <x-responsive-nav-link :href="route('employees.index')" :active="request()->routeIs('employees.index')">
+                    {{ __('Employee') }}
+                </x-responsive-nav-link>
+            @endif
         </div>
 
         <!-- Responsive Settings Options -->
