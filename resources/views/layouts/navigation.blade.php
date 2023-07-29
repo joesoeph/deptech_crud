@@ -23,6 +23,11 @@
                         </x-nav-link>
                     </div>
                 @endif
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('leave-requests.index')" :active="request()->routeIs('leave-requests.index')">
+                        {{ __('Leave Requests') }}
+                    </x-nav-link>
+                </div>
             </div>
 
             <!-- Settings Dropdown -->
@@ -83,6 +88,10 @@
                     {{ __('Employee') }}
                 </x-responsive-nav-link>
             @endif
+
+            <x-responsive-nav-link :href="route('leave-requests.index')" :active="request()->routeIs('leave-requests.index')">
+                {{ __('Leave Requests') }}
+            </x-responsive-nav-link>
         </div>
 
         <!-- Responsive Settings Options -->
