@@ -11,8 +11,8 @@ class LeaveRequest extends Model
 
     protected $fillable = ['reason', 'start_date', 'end_date'];
 
-    public function user()
+    public function employee()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Employee::class);
     }
 }

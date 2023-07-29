@@ -12,4 +12,9 @@ class Employee extends Model
     protected $fillable = [
         'firstname', 'lastname', 'email', 'phone', 'address', 'gender',
     ];
+
+    public function leaveRequests()
+    {
+        return $this->hasMany(LeaveRequest::class);
+    }
 }

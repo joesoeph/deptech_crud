@@ -5,6 +5,21 @@
     @endisset
 
     <div class="mb-4">
+        <label for="employee_id" class="block text-gray-700 text-sm font-bold mb-2">Employee</label>
+        <select name="employee_id" id="employee_id" class="form-select w-full @error('employee_id') border-red-500 @enderror" required>
+            <option value="">-- Select Employee --</option>
+            @foreach ($employees as $employee)
+                <option value="{{ $employee->id }}" {{ old('employee_id', $leaveRequest->employee_id ?? '') == $employee->id ? 'selected' : '' }}>
+                    {{ $employee->firstname }} {{ $employee->lastname }}
+                </option>
+            @endforeach
+        </select>
+        @error('employee_id')
+            <div class="text-red-500 text-xs mt-1">{{ $message }}</div>
+        @enderror
+    </div>
+
+    <div class="mb-4">
         <label for="reason" class="block text-gray-700 text-sm font-bold mb-2">Reason for Leave</label>
         <textarea name="reason" id="reason" class="form-textarea w-full @error('reason') border-red-500 @enderror" required>{{ old('reason', $leaveRequest->reason ?? '') }}</textarea>
         @error('reason')

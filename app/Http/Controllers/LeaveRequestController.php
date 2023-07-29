@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\LeaveRequestFormRequest;
+use App\Models\Employee;
 use App\Models\LeaveRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -24,7 +25,8 @@ class LeaveRequestController extends Controller
      */
     public function create()
     {
-        return view('leave-requests.create');
+        $employees = Employee::all();
+        return view('leave-requests.create', compact('employees'));
     }
 
     /**
@@ -41,7 +43,7 @@ class LeaveRequestController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(LeaveRequestFormRequest $leaveRequest)
+    public function show(LeaveRequest $leaveRequest)
     {
         if ($leaveRequest->user_id !== Auth::user()->id) {
             return redirect()->route('leave-requests.index')->with('error', 'Unauthorized access.');
@@ -53,7 +55,7 @@ class LeaveRequestController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(LeaveRequestFormRequest $leaveRequest)
+    public function edit(LeaveRequest $leaveRequest)
     {
         if ($leaveRequest->user_id !== Auth::user()->id) {
             return redirect()->route('leave-requests.index')->with('error', 'Unauthorized access.');
